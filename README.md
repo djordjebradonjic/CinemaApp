@@ -1,15 +1,14 @@
 # Videotecha
 An application for the management of a small cinema
-# Tech Stack
-The following technologies were used:
 
-Spring Boot
+## Technologies Used
+The following technologies were used in this project:
 
-Hibernate
+* Spring Boot
+* Hibernate
+* Spring Security
+* OpenAPI
+* PostgreSQL
 
-Spring Security
 
-OpenApi
-
-PostgreSQL
 
