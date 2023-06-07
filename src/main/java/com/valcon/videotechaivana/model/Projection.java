@@ -1,15 +1,6 @@
 package com.valcon.videotechaivana.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.validation.constraints.Future;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
+import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -23,17 +14,12 @@ public class Projection {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Future(message = "Projection start time can't be in the past")
-    @NotNull(message = "Projection start time is mandatory")
     @Column(name = "start_time", nullable = false)
     private LocalDateTime startTime;
 
-    @NotNull(message = "Ticket price is mandatory")
-    @Positive(message = "Ticket price must be greater than 0")
     @Column(name = "ticket_price", nullable = false)
     private Double ticketPrice;
 
-    @NotNull
     @Column(name = "end_time", nullable = false)
     private LocalDateTime endTime;
 
