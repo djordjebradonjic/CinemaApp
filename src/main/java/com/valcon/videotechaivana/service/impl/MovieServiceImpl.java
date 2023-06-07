@@ -41,13 +41,10 @@ public class MovieServiceImpl implements MovieService {
     @Override
     @Transactional(readOnly = true)
     public MovieResponseDTO getById(Long id) {
-        return movieRepository.findByIdAndDeletedFalse(id)
-                .map(MovieMapper::mapToDTO)
-                .orElseThrow(() -> new ResourceNotFoundException("Movie", "id", id));
+        Movie existingMovie = getOne(id);
+        return MovieMapper.mapToDTO(existingMovie);
 
     }
-
-    ;
 
     @Override
     @Transactional(readOnly = true)

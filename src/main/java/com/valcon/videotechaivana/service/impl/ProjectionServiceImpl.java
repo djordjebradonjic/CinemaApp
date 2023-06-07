@@ -64,9 +64,8 @@ public class ProjectionServiceImpl implements ProjectionService {
     @Override
     @Transactional(readOnly = true)
     public ProjectionResponseDTO getById(Long id) {
-        return projectionRepository.findByIdAndDeletedFalse(id)
-                .map(ProjectionMapper::mapToDTO)
-                .orElseThrow(() -> new ResourceNotFoundException("Projection", "id", id));
+        Projection existingProjection = getOne(id);
+        return ProjectionMapper.mapToDTO(existingProjection);
 
     }
 

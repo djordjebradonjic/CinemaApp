@@ -2,11 +2,6 @@ package com.valcon.videotechaivana.model;
 
 import com.valcon.videotechaivana.model.enums.UserRole;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,30 +13,21 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Pattern(regexp = "[A-Za-z0-9_]{3,15}$")
     @Column(nullable = false, unique = true)
     private String username;
 
-    @Pattern(regexp = "[A-Za-z0-9_]{3,15}$")
     @Column(nullable = false)
     private String password;
 
-    @NotBlank(message = "Name is mandatory")
-    @Size(min = 2, max = 15, message = "Invalid length of name")
     @Column(nullable = false)
     private String name;
 
-    @NotBlank(message = "Surname is mandatory")
-    @Size(min = 2, max = 20, message = "Invalid length of surname")
     @Column(nullable = false)
     private String surname;
 
-    @Email(message = "Invalid email")
-    @NotNull(message = "Email is mandatory")
     @Column(nullable = false, unique = true)
     private String email;
 
-    @NotNull(message = "User role is mandatory")
     @Column(name = "user_role", nullable = false)
     private UserRole userRole;
 

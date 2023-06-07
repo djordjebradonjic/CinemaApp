@@ -1,19 +1,7 @@
 package com.valcon.videotechaivana.model;
 
 import com.valcon.videotechaivana.model.enums.Genre;
-import jakarta.persistence.Column;
-import jakarta.persistence.ElementCollection;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
+import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,24 +12,18 @@ public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotBlank(message = "Name is mandatory")
     @Column(nullable = false)
     private String name;
-    @NotBlank(message = "Director is mandatory")
     @Column(nullable = false)
     private String director;
 
-    @NotEmpty(message = "Genre of movie is mandatory")
     @ElementCollection(targetClass = Genre.class)
     @Enumerated(value = EnumType.STRING)
     @Column(nullable = false)
     private List<Genre> genres;
 
-    @NotNull(message = "Duration of movie is mandatory")
-    @Min(value = 15, message = "Invalid duration of movie")
     @Column(nullable = false)
     private Integer duration;
-    @NotBlank(message="Description is mandatory")
     @Column(nullable = false)
     private String description;
     @Column(nullable = false)
