@@ -21,19 +21,16 @@ public class UserRequestDTO {
     @Email(message = "Invalid email")
     @NotNull(message = "Email is mandatory")
     private String email;
-    @NotNull(message = "User role is mandatory")
-    private String userRole;
 
     public UserRequestDTO() {
     }
 
-    public UserRequestDTO(String username, String password, String name, String surname, String email, String userRole) {
+    public UserRequestDTO(String username, String password, String name, String surname, String email) {
         this.username = username;
         this.password = password;
         this.name = name;
         this.surname = surname;
         this.email = email;
-        this.userRole = userRole;
     }
 
     public String getUsername() {
@@ -60,7 +57,4 @@ public class UserRequestDTO {
         return email;
     }
 
-    public String getUserRole() {
-        return userRole;
-    }
 }

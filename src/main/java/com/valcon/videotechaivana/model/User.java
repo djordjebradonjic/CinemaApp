@@ -1,14 +1,17 @@
 package com.valcon.videotechaivana.model;
 
-import com.valcon.videotechaivana.model.enums.UserRole;
+import com.valcon.videotechaivana.converter.PasswordConverter;
 import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Entity
 @Table(name="\"user\"")
-public class User {
+public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -17,6 +20,7 @@ public class User {
     private String username;
 
     @Column(nullable = false)
+    @Convert(converter = PasswordConverter.class)
     private String password;
 
     @Column(nullable = false)
@@ -27,9 +31,9 @@ public class User {
 
     @Column(nullable = false, unique = true)
     private String email;
-
-    @Column(name = "user_role", nullable = false)
-    private UserRole userRole;
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private Role role;
 
     @OneToMany(mappedBy = "user")
     private List<Reservation> reservations = new ArrayList<>();
@@ -39,23 +43,12 @@ public class User {
 
     }
 
-    public User(String username, String password, String name, String surname, String email, UserRole userRole) {
+    public User(String username, String password, String name, String surname, String email) {
         this.username = username;
         this.password = password;
         this.name = name;
         this.surname = surname;
         this.email = email;
-        this.userRole = userRole;
-    }
-
-    public User(Long id, String username, String password, String name, String surname, String email, UserRole userRole) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.name = name;
-        this.surname = surname;
-        this.email = email;
-        this.userRole = userRole;
     }
 
     public Long getId() {
@@ -70,8 +63,35 @@ public class User {
         return username;
     }
 
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        List<Role> roles = new ArrayList<>();
+        roles.add(this.role);
+        return roles;
     }
 
     public String getPassword() {
@@ -106,12 +126,12 @@ public class User {
         this.email = email;
     }
 
-    public UserRole getUserRole() {
-        return userRole;
+    public Role getRole() {
+        return role;
     }
 
-    public void setUserRole(UserRole userRole) {
-        this.userRole = userRole;
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     public List<Reservation> getReservations() {
