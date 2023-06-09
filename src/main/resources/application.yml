@@ -1,3 +1,6 @@
+rsa:
+  private-key: classpath:certs/private.pem
+  public-key: classpath:certs/public.pem
 spring:
   datasource:
     username: ${POSTGRES_USER:postgres}
@@ -7,5 +10,6 @@ spring:
 
 jpa:
   show-sql: true
+
 
 

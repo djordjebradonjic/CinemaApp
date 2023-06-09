@@ -5,6 +5,7 @@ import com.valcon.videotechaivana.dto.ProjectionRequestDTO;
 import com.valcon.videotechaivana.service.ProjectionService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,28 +26,33 @@ public class ProjectionController {
         this.projectionService = projectionService;
     }
 
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public ProjectionResponseDTO create(@Valid @RequestBody ProjectionRequestDTO projectionRequestDTO) {
         return projectionService.create(projectionRequestDTO);
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_REGISTERED')")
     @GetMapping("/available")
     public List<ProjectionResponseDTO> getAllAvailable() {
         return projectionService.getAllAvailable();
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_REGISTERED')")
     @GetMapping("/{id}")
     public ProjectionResponseDTO getById(@PathVariable Long id) {
         return projectionService.getById(id);
 
     }
 
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_REGISTERED')")
     @GetMapping
     public List<ProjectionResponseDTO> getAllActive() {
         return projectionService.getAllActive();
     }
 
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @DeleteMapping("/{id}")
     public void deleteById(@PathVariable Long id) {
         projectionService.deleteById(id);
