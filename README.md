@@ -7,7 +7,6 @@ The following technologies were used in this project:
 * Spring Boot
 * Hibernate
 * Spring Security
-* OpenAPI
 * PostgreSQL
 
 ## Usage
