@@ -1,6 +1,7 @@
 package com.valcon.videotechaivana.controller;
 
 import com.valcon.videotechaivana.dto.LoginDTO;
+import com.valcon.videotechaivana.dto.LoginResponseDTO;
 import com.valcon.videotechaivana.dto.UserRequestDTO;
 import com.valcon.videotechaivana.dto.UserResponseDTO;
 import com.valcon.videotechaivana.service.AuthenticationService;
@@ -24,7 +25,7 @@ public class AuthenticationController {
     }
 
     @PostMapping("/login")
-    public String login(@Valid @RequestBody LoginDTO dto) {
+    public LoginResponseDTO login(@Valid @RequestBody LoginDTO dto) {
         return authenticationService.login(dto.getUsername(), dto.getPassword());
     }
 

@@ -1,5 +1,6 @@
 package com.valcon.videotechaivana.service.impl;
 
+import com.valcon.videotechaivana.dto.LoginResponseDTO;
 import com.valcon.videotechaivana.dto.UserRequestDTO;
 import com.valcon.videotechaivana.dto.UserResponseDTO;
 import com.valcon.videotechaivana.mapper.UserMapper;
@@ -46,12 +47,13 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     @Override
-    public String login(String username, String password) {
+    public LoginResponseDTO login(String username, String password) {
         User user = userService.getByUsername(username);
         if (!passwordEncoder.matches(password, user.getPassword())) {
             throw new BadCredentialsException("Password is incorrect");
         }
-        return tokenService.generateToken(user);
+        String token = tokenService.generateToken(user);
+        return new LoginResponseDTO(token,user.getId());
     }
 
 }

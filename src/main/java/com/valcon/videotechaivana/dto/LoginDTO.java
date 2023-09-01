@@ -6,7 +6,7 @@ import jakarta.validation.constraints.Pattern;
 
 public class LoginDTO {
 
-    @Pattern(regexp = "[A-Za-z0-9_]{3,15}$")
+    //@Pattern(regexp = "[A-Za-z0-9_]{3,15}$")
     @NotBlank(message = "Username is required")
     private String username;
     @NotBlank(message = "Password is required")

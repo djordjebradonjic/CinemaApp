@@ -8,9 +8,9 @@ import jakarta.validation.constraints.Size;
 
 public class UserRequestDTO {
 
-    @Pattern(regexp = "[A-Za-z0-9_]{3,15}$")
+    //@Pattern(regexp = "[A-Za-z0-9_]{3,15}$")
     private String username;
-    @Pattern(regexp = "[A-Za-z0-9_]{3,15}$")
+    //@Pattern(regexp = "[A-Za-z0-9_]{3,15}$")
     private String password;
     @NotBlank(message = "Name is mandatory")
     @Size(min = 2, max = 15, message = "Invalid length of name")
