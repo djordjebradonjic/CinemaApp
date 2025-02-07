@@ -8,10 +8,10 @@
 		<version>3.0.6</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.videotecha</groupId>
-	<artifactId>videotecha</artifactId>
+	<groupId>com.valcon</groupId>
+	<artifactId>videotecha-ivana</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>videotecha-</name>
+	<name>videotecha-ivana</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>17</java.version>
